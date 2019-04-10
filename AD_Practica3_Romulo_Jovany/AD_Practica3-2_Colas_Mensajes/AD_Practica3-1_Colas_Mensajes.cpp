@@ -16,12 +16,12 @@ using namespace std; // (cambios) referencia a std de iostream.
 // (struct msgbuf *), todos los campos de datos los verá el sistema como
 // un único (char *)
 
-typedef struct Struct // (cambios) antes "Mi_Tipo_Mensaje"
+typedef struct Mi_Tipo_Mensaje
 {
 	long Id_Mensaje;
 	int Dato_Numerico;
 	char Mensaje[10];
-}Mi_Tipo_Mensaje; // (cambios) Se agregó nombre variable "Mi_Tipo_Mensaje"
+}; // (cambios) Se agregó nombre variable "Mi_Tipo_Mensaje"
 
 int main() //(cambios) main()
 {
@@ -76,9 +76,7 @@ int main() //(cambios) main()
 	// y de un error. Si no se pone este flag, el programa queda bloqueado
 	// hasta que se pueda enviar el mensaje.
 	
-	msgsnd (Id_Cola_Mensajes, (struct msgbuf *)&Un_Mensaje,
-	sizeof(Un_Mensaje.Dato_Numerico)+sizeof(Un_Mensaje.Mensaje),
-	IPC_NOWAIT);
+	msgsnd (Id_Cola_Mensajes, (struct msgbuf *)&Un_Mensaje, sizeof(Un_Mensaje.Dato_Numerico)+sizeof(Un_Mensaje.Mensaje), IPC_NOWAIT);
 	
 	// Se recibe un mensaje del otro proceso. Los parámetros son:
 	// 	- Id de la cola de mensajes.
@@ -93,8 +91,8 @@ int main() //(cambios) main()
 	//    un error en caso de que no haya mensaje de tipo 2 y el programa
 	//    continuaría ejecutándose.
 	
-	msgrcv (Id_Cola_Mensajes, (struct msgbuf *)&Un_Mensaje,
-	sizeof(Un_Mensaje.Dato_Numerico) + sizeof(Un_Mensaje.Mensaje), 2, 0);
+	msgrcv (Id_Cola_Mensajes, (struct msgbuf *)&Un_Mensaje, sizeof(Un_Mensaje.Dato_Numerico) + sizeof(Un_Mensaje.Mensaje), 2, 0);
+
 	cout << "Recibido mensaje tipo 2" << endl;
 	cout << "Dato_Numerico = " << Un_Mensaje.Dato_Numerico << endl;
 	cout << "Mensaje = " << Un_Mensaje.Mensaje << endl;
