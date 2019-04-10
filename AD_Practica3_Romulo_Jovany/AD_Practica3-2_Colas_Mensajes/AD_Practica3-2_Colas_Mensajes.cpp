@@ -91,6 +91,7 @@ int main() // (cambio) main()
 	//msgrcv (Id_Cola_Mensajes, (struct msgbuf*)&Un_Mensaje, sizeof(Un_Mensaje.Dato_Numerico) + sizeof(Un_Mensaje.Mensaje), 1, 0);
 	msgsnd (Id_Cola_Mensajes, (struct msgbuf *)&Un_Mensaje, sizeof(Un_Mensaje.Dato_Numerico)+sizeof(Un_Mensaje.Mensaje), IPC_NOWAIT);
 
+	Un_Mensaje.Mensaje = "Hola";
 	cout << "Recibido mensaje tipo 1" << endl;
 	cout << "Dato_Numerico = " <<
 	Un_Mensaje.Dato_Numerico << endl;
@@ -129,6 +130,5 @@ int main() // (cambio) main()
 	// hasta que se pueda enviar el mensaje.
 	
 	msgsnd (Id_Cola_Mensajes, (struct msgbuf*)&Un_Mensaje, sizeof(Un_Mensaje.Dato_Numerico)+sizeof(Un_Mensaje.Mensaje), IPC_NOWAIT);
-	
 	return 0; // (cambio) linea adicional.
 } 
