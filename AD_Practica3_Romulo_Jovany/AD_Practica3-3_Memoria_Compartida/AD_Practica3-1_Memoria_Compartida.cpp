@@ -1,13 +1,12 @@
 
-// Programa para demostración de memoria compartida.
-//1
+// Programa para demostración de memoria compartida 1
 
 #include <sys/shm.h>
-#include <iostream.h>
+#include <iostream> // (cambio) #include <iostream.h>
 #include <unistd.h>
 #include <stdio.h>
 
-void main()
+int main() // (cambio) void main()
 {
 	key_t Clave;
 	int Id_Memoria;
@@ -29,7 +28,7 @@ void main()
 	if (Clave == -1)
 	{
 		printf("No consigo clave para memoria compartida");
-		exit(0);
+		return -1; // (cambio) exit(0);
 	}
 
 	// Creamos la memoria con la clave recien conseguida.
@@ -46,13 +45,12 @@ void main()
 	// memoria recien
 	// creada.
 
-
 	Id_Memoria = shmget (Clave, sizeof(int)*100, 0777 |
 	IPC_CREAT);
 	if (Id_Memoria == -1)
 	{
 		printf("No consigo Id para memoria compartida");
-		exit (0);
+		return -1; // (cambio) exit (0);
 	}
 
 	// Una vez creada la memoria, hacemos que uno de
@@ -67,7 +65,7 @@ void main()
 	if (Memoria == NULL)
 	{
 		printf("No consigo memoria compartida");
-		exit (0);
+		return -1; // (cambio) exit (0);
 	}
 
 	// Ya podemos utilizar la memoria.
@@ -83,6 +81,7 @@ void main()
 		{
 			Memoria[j] = i;
 		}
+
 		printf("Escrito %d",i);
 		sleep (1);
 	}
@@ -91,4 +90,6 @@ void main()
 
 	shmdt ((char *)Memoria);
 	shmctl (Id_Memoria, IPC_RMID, (struct shmid_ds *)NULL);
+
+	return 0; // linea adicional.
 }
