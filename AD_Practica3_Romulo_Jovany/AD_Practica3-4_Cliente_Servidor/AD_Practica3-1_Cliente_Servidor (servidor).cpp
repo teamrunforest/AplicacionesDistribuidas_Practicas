@@ -2,9 +2,7 @@
 // Práctica 3: Programación cliente-servidor sobre TCP | UDP
 // Con el código visto en clases sobre servidores TCP – UDP se deberá pasar a su cuenta y compilar
 // Para verificar su funcionamiento.
-
 // Servidor
-// Fuente de apoyo: https://es.wikibooks.org/wiki/Programaci%C3%B3n_en_C/Sockets.
 
 #include<stdio.h>
 #include<string.h>
@@ -18,14 +16,14 @@
 #define STDOUT 1
 #define SERV_ADDR 1234
 
-int main(int argc, char **argv){ // (cambio) void main()
+int main() // (cambio) void main()
 {
 	int rval;
 	int sock,length, msgsock;
 	struct sockaddr_in server;
 	char buf[1024];
 	sock=socket(PF_INET, SOCK_STREAM, 0);
-
+	
 	if(sock <0)
 	{
 		perror("NO hay socket de escucha");
